@@ -1,4 +1,5 @@
-import express from 'express';
+// import express from 'express';
+const express = require("express");
 // if you are using the latest version of express, you dont have to install body-parser package
 // body parser is now added to express
 // import bodyParser from 'body-parser';
@@ -19,10 +20,11 @@ const articlesInfo = {
 };
 
 const app = express();
+const PORT = process.env.PORT || 8000;
 
 // MIDDLEWARE
 // app.use(bodyParser.json());
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
 // app.get('/hello', (req, res) => res.send('Hello!'));
@@ -38,4 +40,4 @@ app.post('/api/articles/:name/upvote', (req, res) => {
     res.status(200).send(`${articleName} now has ${articlesInfo[articleName].upvotes} upvotes`)
 });
 
-app.listen(8000, () => console.log('Listening on port 8000'));
+app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
