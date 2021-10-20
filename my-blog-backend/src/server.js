@@ -4,9 +4,13 @@ const express = require("express");
 // body parser is now added to express
 // import bodyParser from 'body-parser';
 
+// troubleshooting -- atlas
+// https://www.mongodb.com/blog/post/quick-start-nodejs-mongodb--how-to-get-connected-to-your-database
+// troubleshooting -- local
+// https://www.tutorialsteacher.com/nodejs/access-mongodb-in-nodejs
 // allows us to connect to our local db
 // import { MongoClient } from 'mongodb';
-const MongoClient = require("mongodb");
+const {MongoClient} = require("mongodb");
 
 // mongoose
 // usine node.js 'require()'
@@ -56,11 +60,11 @@ app.get('/api/articles/:name', async (req, res) => {
         // #2 options object -> used to change certain parameters about our connection to mongodb
         // mongodb complains if we dont pass { useNewUrlParser: true }
         // connection is asyncronous, returns a promise -> use async await
-        // const client = await MongoClient.connect('mongodb://localhost:27107', { useNewUrlParser: true }, console.log('here'));
+        const client = await MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true });
 
-        const client = await mongoose.connect('mongodb://localhost:27017', {
-            useNewUrlParser: true,
-        }, console.log('here'));
+        // const client = await mongoose.connect('mongodb://localhost:27017', {
+        //     useNewUrlParser: true,
+        // }, console.log('here'));
 
         // query the my-blog db
         const db = client.db('my-blog');
