@@ -95,19 +95,19 @@ app.post('/api/articles/:name/upvote', async (req, res) => {
     try {
         const articleName = req.params.name;
 
-        const client = await MongoClient.connect('mongodb://localhost:27017', {
-            useNewUrlParser: true
-        });
+        const client = await MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true });
         const db = client.db('my-blog');
 
-        const articleInfo = await db.collection('articles').findOne({ name: articleName });
-        await db.collection('articles').updateOne({ name: articleName,
-            '$set': {
-                upvotes: articleInfo.upvotes + 1,
-            },
-        });
+        // troubleshooting 
+        //https://medium.com/@rdgovindarajan/upvote-downvote-logic-in-mongodb-via-nodejs-3f375e035f91
+        const articleCollection = await db.collection('articles');
+        await articleCollection.updateOne({ name: articleName },{
+                 $inc: { "upvotes": 1 },
+             }
+        );
 
         const updatedArticleInfo = await db.collection('articles').findOne({ name: articleName });
+
         res.status(200).json(updatedArticleInfo);
 
         client.close();
