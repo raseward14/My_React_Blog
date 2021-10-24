@@ -49,6 +49,10 @@ app.use(express.json());
 // app.post('/hello', (req, res) => res.send('Hello!'));
 // app.post('/hello', (req, res) => res.send(`Hello ${req.body.name}!`));
 
+const withDB = async (operations) => {
+
+}
+
 app.get('/api/articles/:name', async (req, res) => {
     try {
         // get the article name from the url parameters
@@ -138,12 +142,13 @@ app.post('/api/articles/:name/add-comment', async (req, res) => {
         // https://www.mongodb.com/developer/quickstart/cheat-sheet/
         // Mongodb cheat sheet
         const articleCollection = await db.collection('articles');
-        await articleCollection.updateOne({name: articleName}, {$push:{"comments":{ username, text }}})
+        await articleCollection.updateOne({name:articleName}, {$push:{"comments":{ username, text }}})
 
-        const updatedArticleInfo = db.collection('articles').findOne({name:articleName});
+        const updatedArticleInfo = await db.collection('articles').findOne({ name:articleName });
 
         res.status(200).json(updatedArticleInfo);
 
+        client.close();
     } catch (error) {
         res.status(500).json({message: 'Error connecting to the server', error})
     };
