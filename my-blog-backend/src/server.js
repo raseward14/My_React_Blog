@@ -135,6 +135,8 @@ app.post('/api/articles/:name/add-comment', async (req, res) => {
         const client = await MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true });
         const db = client.db('my-blog');
 
+        // https://www.mongodb.com/developer/quickstart/cheat-sheet/
+        // Mongodb cheat sheet
         const articleCollection = await db.collection('articles');
         await articleCollection.updateOne({name: articleName}, {$push:{"comments":{ username, text }}})
 
