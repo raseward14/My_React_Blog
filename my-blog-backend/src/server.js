@@ -195,6 +195,6 @@ app.post('/api/articles/:name/add-comment', async (req, res) => {
     // articlesInfo[articleName].comments.push({ username, text });
     // send back a response
     // res.status(200).send(articlesInfo[articleName]);
-})
+});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
