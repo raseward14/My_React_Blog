@@ -125,15 +125,35 @@ app.post('/api/articles/:name/upvote', async (req, res) => {
 });
 
 // add comment
-app.post('/api/articles/:name/add-comment', (req, res) => {
-    // pull the username and text properties out of the req.body
-    const { username, text } = req.body;
-    // get articleName from URL parameters
-    const articleName = req.params.name;
+app.post('/api/articles/:name/add-comment', async (req, res) => {
+    try {
+        // pull the username and text properties out of the req.body
+        const { username, text } = req.body;
+        // get articleName from URL parameters
+        const articleName = req.params.name;
+
+        const client = await MongoClient.connect('mongodb://localhost:27017', { useNewUrlParser: true });
+        const db = client.db('my-blog');
+
+        const articleCollection = await db.collection('articles');
+        await articleCollection.updateOne({name: articleName}, {$push:{"comments":{ username, text }}})
+
+        const updatedArticleInfo = db.collection('articles').findOne({name:articleName});
+
+        res.status(200).json(updatedArticleInfo);
+
+    } catch (error) {
+        res.status(500).json({message: 'Error connecting to the server', error})
+    };
+
+
+
+
+
     // we dont declare articlesInfo bc its global scope
-    articlesInfo[articleName].comments.push({ username, text });
+    // articlesInfo[articleName].comments.push({ username, text });
     // send back a response
-    res.status(200).send(articlesInfo[articleName]);
+    // res.status(200).send(articlesInfo[articleName]);
 })
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
