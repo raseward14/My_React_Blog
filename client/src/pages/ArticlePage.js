@@ -11,7 +11,7 @@ function ArticlePage({ match }) {
     const [articleInfo, setArticleInfo] = useState({ upvotes: 0, comments: [] })
     useEffect(() => {
        const fetchData = async () => {
-            const result = await fetch(`http://localhost:8000/api/articles/${name}`);
+            const result = await fetch(`/api/articles/${name}`);
             const body = await result.json();
 
             setArticleInfo(body);
