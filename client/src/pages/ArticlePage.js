@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ArticlesList from '../components/ArticlesList';
+import CommentsList from '../components/CommentsList';
 import articleContent from './article-content';
 import NotFoundPage from './NotFoundPage';
 
@@ -19,6 +20,15 @@ function ArticlePage({ match }) {
        fetchData();
     }, [name]);
 
+    // const upvote = async () => {
+    //     const vote = await fetch(`/api/articles/${name}/upvote`, {
+    //         method: 'POST'
+    //     })
+    //     const body = vote.json();
+    //     console.log(body);
+    //     setArticleInfo(body);
+    // };
+
     if(!article) return <NotFoundPage />
 
     const otherArticles = articleContent.filter(article => article.name !== name);
@@ -27,9 +37,11 @@ function ArticlePage({ match }) {
         <>
         <h1>{article.title}</h1>
         <p>This article has {articleInfo.upvotes} upvotes!</p> 
+        {/* <button onClick='upvote()'>Upvote!</button> */}
         {article.content.map((paragraph, key) => (
                 <p key={key}>{paragraph}</p>
             ))}
+        <CommentsList comments={articleInfo.comments}/>
         <h3>Other Articles</h3>
         <ArticlesList articles={otherArticles} />
         </>
