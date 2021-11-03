@@ -13,6 +13,8 @@ function AddCommentForm({ articleName, setArticleInfo }) {
         });
         const body = await result.json();
         setArticleInfo(body);
+        setUsername('');
+        setCommentText('');
     };
 
     return (
