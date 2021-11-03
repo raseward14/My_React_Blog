@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-function AddCommentForm() {
+function AddCommentForm({ articleName, setArticleInfo }) {
     const [username, setUsername] = useState('');
     const [commentText, setCommentText] = useState('');
 
-    const addComment = async({ articleName }) => {
+    const addComment = async() => {
         const result = await fetch(`/api/articles/${articleName}/add-comment`, {
             method: 'post',
             body: JSON.stringify({ username, text: commentText }),
             header: {
                 'Content-Type': 'application/json',
             }
-        })
+        });
+        const body = await result.json();
+        setArticleInfo(body);
     };
 
     return (
@@ -23,7 +25,7 @@ function AddCommentForm() {
                 Comment:
                 <textarea rows='4' cols='50' value={commentText} onChange={(event) => setCommentText(event.target.value)} />
             </label>
-            <button>Add Comment</button>
+            <button onClick={() => addComment()}>Add Comment</button>
         </div>
     )
 };
