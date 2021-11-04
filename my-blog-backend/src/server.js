@@ -11,10 +11,11 @@ const express = require("express");
 // allows us to connect to our local db
 // import { MongoClient } from 'mongodb';
 const {MongoClient} = require("mongodb");
+const path = require('path');
 
 // mongoose
 // usine node.js 'require()'
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 // using ES6 imports
 // import mongoose from 'mongoose';
 
@@ -41,7 +42,8 @@ const PORT = process.env.PORT || 8000;
 
 // MIDDLEWARE
 // app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // app.get('/hello', (req, res) => res.send('Hello!'));
@@ -195,6 +197,10 @@ app.post('/api/articles/:name/add-comment', async (req, res) => {
     // articlesInfo[articleName].comments.push({ username, text });
     // send back a response
     // res.status(200).send(articlesInfo[articleName]);
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/build/index.html'))
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));
