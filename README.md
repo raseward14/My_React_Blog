@@ -22,7 +22,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Usage
 * **The Finished Product**  
-![My React Blog](images/snapshot.png)
+![My React Blog](images/snapshot.jpg)
 
 To duplicate locally!
 1. clone repository
