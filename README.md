@@ -12,7 +12,7 @@ Express.js, and Node.js are used on the back end to set up our server. We utiliz
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), and hosted on Amazon Web Services.
 
-**Check it out [here](http://ec2-18-189-3-248.us-east-2.compute.amazonaws.com){:target="\_blank"}**
+**Check it out [here](http://ec2-18-189-3-248.us-east-2.compute.amazonaws.com)**
 
 ## Table of Contents
 * [Usage](#usage)
