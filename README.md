@@ -22,19 +22,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Usage
 * **The Finished Product**  
-![Employee Directory](public/assets/images/snapshot.png)
+![Employee Directory](images/snapshot.png)
+
+To duplicate locally!
+1. clone repository
+2. run the command, npm install
+3. run the command, npm start
 
 ## Technologies
-* npm fontawesome
-* npm bootstrap
-* npm react
-* npm axios
+* npm forever
+* npx create-react-app
+* express
 * node.js
-* Random User API
+* MongoDB
+* react.js
 
 ## Credits
 Here is the LinkedIn tutorial!
-*[React: Creating and Hosting a Full-Stack Site](https://www.linkedin.com/learning/react-creating-and-hosting-a-full-stack-site/react-for-full-stack-solutions?autoAdvance=true&autoSkip=false&autoplay=true&resume=false&u=41910756)
+* [React: Creating and Hosting a Full-Stack Site](https://www.linkedin.com/learning/react-creating-and-hosting-a-full-stack-site/react-for-full-stack-solutions?autoAdvance=true&autoSkip=false&autoplay=true&resume=false&u=41910756)
 
 Here are a few resources that helped me get this project knocked out!
 * [NPM's Foever](https://www.npmjs.com/package/forever)
